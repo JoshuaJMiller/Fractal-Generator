@@ -1,0 +1,6 @@
+.vs/*
+Debug/*
+*/Debug/*
+*.vcxproj.user
+x64/*
+*/x64/*
