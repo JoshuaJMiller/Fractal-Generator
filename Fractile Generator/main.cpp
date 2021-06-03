@@ -1,30 +1,13 @@
 #include <iostream>
 #include <string>
 #include "Bitmap.h"
+#include "Mandelbrot.h"
 
 #pragma pack(2)
 
-int main()
+void bitmapCreator()
 {
-	/*const int WIDTH{ 800 };
-	const int HEIGHT{ 600 };
 
-	std::cout << std::boolalpha;
-	std::string filename{ "test4debug.bmp" };
-	
-	Bitmap bitmap(WIDTH, HEIGHT);
-
-	std::array<uint8_t, 3> blue = { 0, 0, 255 };
-
-	bitmap.fillBitmap(blue);
-
-	bool success = bitmap.write(filename);
-
-	std::cout << success << "\nfinished." << std::endl;
-*/
-	//1600 x 900
-
-	
 	std::cout << "BITMAP creator!" << std::endl;
 
 	bool oversized = 1;
@@ -46,7 +29,7 @@ int main()
 			oversized = 1;
 			std::cout << "oversized bitmap! (max W x H is 1600 x 900)" << std::endl;
 		}
-		else 
+		else
 		{
 			break;
 		}
@@ -77,7 +60,7 @@ int main()
 			break;
 		}
 	}
-	
+
 	while (!validName)
 	{
 		std::cout << "enter file name (including .bmp extension) > ";
@@ -93,7 +76,7 @@ int main()
 		//}
 		break;
 	}
-	
+
 	bool created = 0;
 
 	Bitmap bitmap1(width, height);
@@ -101,6 +84,50 @@ int main()
 	created = bitmap1.write(fileName1);
 
 	std::cout << "finished" << std::endl;
+}
+
+int main()
+{
+	const int WIDTH{ 800 };
+	const int HEIGHT{ 600 };
+
+	std::cout << std::boolalpha;
+	std::string filename{ "test6debug.bmp" };
+
+	Bitmap bitmap(WIDTH, HEIGHT);
+
+	//std::array<uint8_t, 3> blue = { 0, 255, 0 };
+
+	//bitmap.fillBitmap(0, 0, 255);
+
+	double max = 99999;
+	double min = -99999;
+
+	for (int y = 0; y < HEIGHT; ++y)
+	{
+		for (int x = 0; x < WIDTH; ++x)
+		{
+			double xFractile = (x - WIDTH / 2) * 2.0 / WIDTH;
+			double yFractile = (y - HEIGHT / 2) * 2.0 / HEIGHT;
+			int iterations = Mandelbrot::getIterations(xFractile, yFractile);
+			uint8_t red = (uint8_t)(256 * ((double)iterations/Mandelbrot::maxIterations));
+			//std::cout << "color" << (double)red << std::endl;
+			bitmap.setPixel(x, y, 0, red, 0);
+			if (red < min)
+			{
+				min = red;
+			}
+			if (red > max)
+			{
+				max = red;
+			}
+		}
+	}
+
+	bool success = bitmap.write(filename);
+
+	std::cout << success << "\nfinished." << std::endl;
+
 
 	return 0;
 }

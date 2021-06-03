@@ -76,3 +76,14 @@ void Bitmap::fillBitmap(std::array<uint8_t, 3> rgb)
 		}
 	}	
 }
+
+void Bitmap::fillBitmap(uint8_t p_red, uint8_t p_green, uint8_t p_blue)
+{
+	for (size_t y{ 0 }; y < height; ++y)
+	{
+		for (size_t x{ 0 }; x < width; ++x)
+		{
+			setPixel(x, y, p_red, p_green, p_blue);
+		}
+	}
+}

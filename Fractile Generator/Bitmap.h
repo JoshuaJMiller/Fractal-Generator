@@ -14,6 +14,7 @@ public:
 	bool write(std::string p_filname);
 	void setPixel(int p_x, int p_y, uint8_t p_red, uint8_t p_green, uint8_t p_blue);
 	void fillBitmap(std::array<uint8_t, 3>p_color);
+	void fillBitmap(uint8_t p_red, uint8_t p_green, uint8_t p_blue);
 
 private:
 
