@@ -6,6 +6,7 @@
 #include "Mandelbrot.h"
 #include "ZoomList.h"
 #include "Zoom.h"
+#include "FractalCreator.h"
 
 #pragma pack(2)
 
@@ -90,33 +91,35 @@ void bitmapCreator()
 	std::cout << "finished" << std::endl;
 }
 
+
+
 int main()
 {
+	std::cout << std::boolalpha;
+	std::string filename{ "fractal1.bmp" };
+	FractalCreator fractalCreator(800, 600);
+	fractalCreator.addZoom(4.0);
+	fractalCreator.addZoom(295, 202, 0.1);
+	fractalCreator.calculateIterations();
+	fractalCreator.drawFractal();
+	fractalCreator.writeBitmap(filename);
+
+	//members
+	/*int totalIterations{ 0 };
 	const int WIDTH{ 800 };
 	const int HEIGHT{ 600 };
-
-	std::cout << std::boolalpha;
-	std::string filename{ "test6debug.bmp" };
-
-	Bitmap bitmap(WIDTH, HEIGHT);
-
-	//std::array<uint8_t, 3> blue = { 0, 255, 0 };
-
-	//bitmap.fillBitmap(0, 0, 255);
-
-	double max = 99999;
-	double min = -99999;
-
-	ZoomList zoomList(WIDTH, HEIGHT);
-
-	zoomList.add(Zoom(WIDTH/2, HEIGHT/2, 4.0/WIDTH));
-	zoomList.add(Zoom(295, HEIGHT - 202, 0.1));
-	//zoomList.add(Zoom(312, HEIGHT - 304, 0.1));
-
-	std::unique_ptr<int[]> histogram (new int[Mandelbrot::maxIterations]{  });
+	std::unique_ptr<int[]> histogram(new int[Mandelbrot::maxIterations]{  });
 	std::unique_ptr<int[]> fractal(new int[WIDTH * HEIGHT]{  });
+	Bitmap bitmap(WIDTH, HEIGHT);
+	ZoomList zoomList(WIDTH, HEIGHT);
+	bool success = bitmap.write(filename);*/
 
-	for (int y = 0; y < HEIGHT; ++y)
+	//add zoom code
+	/*zoomList.add(Zoom(WIDTH/2, HEIGHT/2, 4.0/WIDTH));
+	zoomList.add(Zoom(295, HEIGHT - 202, 0.1));*/
+
+	//iterations calc code
+	/*for (int y = 0; y < HEIGHT; ++y)
 	{
 		for (int x = 0; x < WIDTH; ++x)
 		{
@@ -132,14 +135,13 @@ int main()
 			}
 		}
 	}
-
-	int totalIterations{ 0 };
 	for (int i{ 0 }; i < Mandelbrot::maxIterations; ++i)
 	{
 		totalIterations += histogram[i];
-	}
+	}*/
 
-	for (int y = 0; y < HEIGHT; ++y)
+	//drawing code
+	/*for (int y = 0; y < HEIGHT; ++y)
 	{
 		for (int x = 0; x < WIDTH; ++x)
 		{
@@ -163,11 +165,11 @@ int main()
 
 			bitmap.setPixel(x, y, red, green, blue);
 		}
-	}
+	}*/
 
-	bool success = bitmap.write(filename);
+	
 
-	std::cout << success << "\nfinished." << std::endl;
+	std::cout << fractalCreator.success << "\nfinished." << std::endl;
 
 
 	return 0;
