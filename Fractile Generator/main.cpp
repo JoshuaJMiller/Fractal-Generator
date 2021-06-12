@@ -4,6 +4,8 @@
 #include <math.h>
 #include "Bitmap.h"
 #include "Mandelbrot.h"
+#include "ZoomList.h"
+#include "Zoom.h"
 
 #pragma pack(2)
 
@@ -105,6 +107,12 @@ int main()
 	double max = 99999;
 	double min = -99999;
 
+	ZoomList zoomList(WIDTH, HEIGHT);
+
+	zoomList.add(Zoom(WIDTH/2, HEIGHT/2, 4.0/WIDTH));
+	zoomList.add(Zoom(295, HEIGHT - 202, 0.1));
+	//zoomList.add(Zoom(312, HEIGHT - 304, 0.1));
+
 	std::unique_ptr<int[]> histogram (new int[Mandelbrot::maxIterations]{  });
 	std::unique_ptr<int[]> fractal(new int[WIDTH * HEIGHT]{  });
 
@@ -112,9 +120,9 @@ int main()
 	{
 		for (int x = 0; x < WIDTH; ++x)
 		{
-			double xFractile = (x - WIDTH / 2 - 200) * 2.0 / HEIGHT;
-			double yFractile = (y - HEIGHT / 2) * 2.0 / HEIGHT;
-			int iterations = Mandelbrot::getIterations(xFractile, yFractile);
+			std::pair<double, double> coords = zoomList.doZoom(x, y);
+
+			int iterations = Mandelbrot::getIterations(coords.first, coords.second);
 
 			fractal[y * WIDTH + x] = iterations;
 

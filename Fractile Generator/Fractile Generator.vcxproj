@@ -124,15 +124,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="FractalCreator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mandelbrot.cpp" />
+    <ClCompile Include="ZoomList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="BitmapFile.h" />
     <ClInclude Include="BitmapInfo.h" />
+    <ClInclude Include="FractalCreator.h" />
     <ClInclude Include="Mandelbrot.h" />
     <ClInclude Include="Pixel.h" />
+    <ClInclude Include="Zoom.h" />
+    <ClInclude Include="ZoomList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
