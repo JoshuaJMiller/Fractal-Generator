@@ -1,12 +1,8 @@
 #include <iostream>
 #include <string>
-#include <memory>
-#include <math.h>
-#include "Bitmap.h"
-#include "Mandelbrot.h"
-#include "ZoomList.h"
-#include "Zoom.h"
+
 #include "FractalCreator.h"
+#include "RGB.h"
 
 #pragma pack(2)
 
@@ -91,86 +87,26 @@ void bitmapCreator()
 	std::cout << "finished" << std::endl;
 }
 
-
-
 int main()
 {
+	/*RGB rgb1(4, 5, 6);
+	RGB rgb2(1, 2, 3);
+	RGB rgb3 = rgb1 - rgb2;
+
+	std::cout << rgb3.r << rgb3.g << rgb3.b << std::endl;*/
+
 	std::cout << std::boolalpha;
 	std::string filename{ "fractal1.bmp" };
 	FractalCreator fractalCreator(800, 600);
-	fractalCreator.addZoom(4.0);
-	fractalCreator.addZoom(295, 202, 0.1);
-	fractalCreator.calculateIterations();
-	fractalCreator.drawFractal();
-	fractalCreator.writeBitmap(filename);
 
-	//members
-	/*int totalIterations{ 0 };
-	const int WIDTH{ 800 };
-	const int HEIGHT{ 600 };
-	std::unique_ptr<int[]> histogram(new int[Mandelbrot::maxIterations]{  });
-	std::unique_ptr<int[]> fractal(new int[WIDTH * HEIGHT]{  });
-	Bitmap bitmap(WIDTH, HEIGHT);
-	ZoomList zoomList(WIDTH, HEIGHT);
-	bool success = bitmap.write(filename);*/
+	fractalCreator.addRange(0.0, RGB(0, 0, 0));
+	fractalCreator.addRange(0.3, RGB(255, 0, 0));
+	fractalCreator.addRange(0.5, RGB(255, 255, 0));
+	fractalCreator.addRange(1.0, RGB(255, 255, 255));
 
-	//add zoom code
-	/*zoomList.add(Zoom(WIDTH/2, HEIGHT/2, 4.0/WIDTH));
-	zoomList.add(Zoom(295, HEIGHT - 202, 0.1));*/
-
-	//iterations calc code
-	/*for (int y = 0; y < HEIGHT; ++y)
-	{
-		for (int x = 0; x < WIDTH; ++x)
-		{
-			std::pair<double, double> coords = zoomList.doZoom(x, y);
-
-			int iterations = Mandelbrot::getIterations(coords.first, coords.second);
-
-			fractal[y * WIDTH + x] = iterations;
-
-			if (iterations != Mandelbrot::maxIterations)
-			{
-				histogram[iterations]++;
-			}
-		}
-	}
-	for (int i{ 0 }; i < Mandelbrot::maxIterations; ++i)
-	{
-		totalIterations += histogram[i];
-	}*/
-
-	//drawing code
-	/*for (int y = 0; y < HEIGHT; ++y)
-	{
-		for (int x = 0; x < WIDTH; ++x)
-		{
-			uint8_t red{ 0 };
-			uint8_t green{ 0 };
-			uint8_t blue{ 0 };
-
-			int iterations = fractal[y * WIDTH + x];
-
-			if (iterations != Mandelbrot::maxIterations)
-			{
-
-				double hue{ 0 };
-				for (int i{ 0 }; i <= iterations; ++i)
-				{
-					hue += ((double)histogram[i]) / totalIterations;
-				}
-
-				green = pow(255, hue);
-			}
-
-			bitmap.setPixel(x, y, red, green, blue);
-		}
-	}*/
-
-	
+	fractalCreator.run(filename);
 
 	std::cout << fractalCreator.success << "\nfinished." << std::endl;
-
 
 	return 0;
 }
