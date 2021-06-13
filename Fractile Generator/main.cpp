@@ -96,13 +96,13 @@ int main()
 	std::cout << rgb3.r << rgb3.g << rgb3.b << std::endl;*/
 
 	std::cout << std::boolalpha;
-	std::string filename{ "fractal1.bmp" };
+	std::string filename{ "fractal2.bmp" };
 	FractalCreator fractalCreator(800, 600);
 
-	fractalCreator.addRange(0.0, RGB(0, 0, 0));
-	fractalCreator.addRange(0.3, RGB(255, 0, 0));
-	fractalCreator.addRange(0.5, RGB(255, 255, 0));
-	fractalCreator.addRange(1.0, RGB(255, 255, 255));
+	/*fractalCreator.addRange(0.0, RGB(255, 0, 0));
+	fractalCreator.addRange(0.3, RGB(0, 255, 0));
+	fractalCreator.addRange(0.5, RGB(0, 255, 255));
+	fractalCreator.addRange(1.0, RGB(0, 255, 255));*/
 
 	fractalCreator.run(filename);
 

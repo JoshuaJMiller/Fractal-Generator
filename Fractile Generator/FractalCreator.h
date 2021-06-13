@@ -15,7 +15,7 @@ public:
 	//member funtions
 	FractalCreator(int p_width, int p_height);
 	void run(std::string p_filename);
-	void addRange(double p_range, const RGB& p_rgb);
+
 private:
 	//memeber variables
 	const int WIDTH;
@@ -31,6 +31,8 @@ private:
 	bool gotFirstRange{ false };
 
 	//member functions
+	void addRange(double p_range, const RGB& p_rgb);
+	int getRange(int p_iterations) const;
 	void calculateIterations();
 	void drawFractal();
 	void calculateRangeTotals();
