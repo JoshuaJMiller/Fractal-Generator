@@ -1,7 +1,7 @@
 # Fractal Generator
 Generates Beautiful Mandelbrot Fractal
 
-![Mandelbrot](fractal1.bmp?raw=true)
+![Mandelbrot](fractal jpeg.jpg?raw=true)
 
 ## What I Learned
 - Programmatic creation of Bitmap file in C++
